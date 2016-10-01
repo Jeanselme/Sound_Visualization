@@ -16,5 +16,10 @@ By default :
   - heightOfResultInPixels = 20
   - File is not saved except if you precise an output filename.
 
+## Result
+This is the computed result :
+![Result](https://raw.githubusercontent.com/Jeanselme/Sound_Visualization/master/images/result.png)
+
+
 ## Libraries
 Needs numpy, scipy and sys. Compiled with python3.5
