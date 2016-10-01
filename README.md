@@ -17,7 +17,7 @@ By default :
   - File is not saved except if you precise an output filename.
 
 ## Result
-This is the computed result :
+This is the computed result :  
 ![Result](https://raw.githubusercontent.com/Jeanselme/Sound_Visualization/master/images/result.png)
 
 
