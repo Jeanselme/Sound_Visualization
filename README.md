@@ -22,4 +22,5 @@ This is the computed result :
 
 
 ## Libraries
+Needs my library color_mapping.
 Needs numpy, scipy and sys. Compiled with python3.5

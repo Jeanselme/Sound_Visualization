@@ -7,6 +7,7 @@
 import sys
 import numpy as np
 import scipy.misc
+import color_mapping
 from scipy.fftpack import fft
 from scipy.io import wavfile as wv
 
@@ -17,22 +18,6 @@ def frequencyAnalysis(sample):
     using FFT
     """
     return fft(sample)
-
-def associatedColor(number, zeroColor = [0,0,255], oneColor = [255,0,0]):
-    """
-    Computes the gradient color between zeroColor and oneColor.
-    If number is one you observe oneColor
-    And if it is zero, you observe zeroColor
-    """
-    return [zeroColor[i] + number * (oneColor[i] - zeroColor[i]) for i in range(3)]
-
-def colorRegion(img, color, ibeg, iend, jbeg, jend):
-    """
-    Colors the rectangle defined by ibeg, iend, jbeg, jend of the given image
-    """
-    for i in range(ibeg,iend):
-        for j in range(jbeg,jend):
-            img[i][j] = color
 
 def visualSound(sounds, frequencyNumber, sampleNumber, dimension, output):
     """
@@ -55,14 +40,16 @@ def visualSound(sounds, frequencyNumber, sampleNumber, dimension, output):
         maxfft = max(fftSum)
         minfft = min(fftSum)
 
+        colors = [[0,0,255],[0,255,0],[255,0,0]]
         # Complete the image
         for freq in range(frequencyNumber) :
             ibeg = freq*dimension
             iend = (freq+1)*dimension
             jbeg = sample*dimension
             jend = (sample+1)*dimension
-            colorRegion(res, associatedColor((fftSum[freq]-minfft)/(maxfft-minfft)),
-             ibeg, iend, jbeg, jend)
+            color_mapping.colorRegion(res, color_mapping.colorRepartition(
+			 (fftSum[freq]-minfft)/(maxfft-minfft), colors),
+			 ibeg, iend, jbeg, jend)
 
     scipy.misc.imshow(res)
     if (output != ""):
